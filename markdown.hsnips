@@ -78,16 +78,20 @@ endsnippet
 # == Hat Operation ==
 
 # ==== Auto Capture Hat Operation ====
-snippet `(\(?)(\\?[a-zA-Z]\w*)(\)?)(hbar|BAR)` "Bar" iAm
+snippet `(\(?)(\\?[a-zA-Z]\w*)(\)?)(bar|BAR)` "bar" iAm
 \overline{``rv = m[1] + m[2] + m[3]``}
 endsnippet
 
-snippet `(\\?[a-zA-Z]\w*)(htd|TD)` "tilde" iAm
+snippet `(\\?[a-zA-Z]\w*)(htd)` "tilde" iAm
+\tilde{``rv = m[1]``}
+endsnippet
+
+snippet `(\\?[a-zA-Z]\w*)(wtd|TD)` "wide tilde" iAm
 \widetilde{``rv = m[1]``}
 endsnippet
 
 snippet `(\\?[a-zA-Z]\w*)(hat|HAT)` "hat" iAm
-\hat{``rv = m[1]``}
+\widehat{``rv = m[1]``}
 endsnippet
 
 snippet `(\\?[a-zA-Z]\w*)(hvec)` "Vector postfix" iAm
@@ -127,8 +131,8 @@ snippet inv "inverse" wAm
 endsnippet
 
 priority 10000
-snippet TR "inverse" iAm
-^{\mathsf{T}}
+snippet TR "transpose" iAm
+^{\top}
 endsnippet
 
 snippet CL "complement" wAm
@@ -155,6 +159,11 @@ endsnippet
 
 snippet td "subscript" iAm
 _{${1}}$0
+endsnippet
+
+priority 100
+snippet !td "subscript with negative spacing" iAm
+_{\! ${1}}$0
 endsnippet
 
 snippet `([A-Za-z])(\d)` "auto subscript" wAm
@@ -259,19 +268,23 @@ snippet ... "cdots" iAm
 \cdots
 endsnippet
 
-snippet <> "hokje" iA
-\diamond 
-endsnippet
-
 snippet dollar "dollar" iAm
 \text{\textdollar}$0
 endsnippet
 
 priority 100
-snippet `((\d+)|(\d*)(\.\d+)?)#` "add comma" iAm
+snippet `((\d+)|(\d*)(\.\d+)?)##` "add comma" iAm
 ``
 rv = addComma(m[1]);
 ``
+endsnippet
+
+snippet | "middle" iAm
+\mid
+endsnippet
+
+snippet :: "colon" iAm
+\colon
 endsnippet
 
 # +... -> , \cdots
@@ -302,6 +315,14 @@ snippet xx "cross" iAm
 \times 
 endsnippet
 
+snippet o+ "oplus" iAm
+\oplus
+endsnippet
+
+snippet oc "propotional to" iAm
+\propto
+endsnippet
+
 snippet eps "epsilon" wAm
 \epsilon
 endsnippet
@@ -325,6 +346,10 @@ endsnippet
 
 snippet , ", " iAm
 ,\
+endsnippet
+
+snippet ; "; " iAm
+;\
 endsnippet
 
 # ==== Logic Symbol ====
@@ -396,6 +421,18 @@ snippet << "<<" iAm
 \ll
 endsnippet
 
+snippet sim "similar to" iAm
+\sim
+endsnippet
+
+snippet succ "succeeds" iAm
+\succ
+endsnippet
+
+snippet >~ "succeeds or similar to" iAm
+\succsim
+endsnippet
+
 # == Auto Environment ==
 
 # ==== Auto Math Mode ====
@@ -424,11 +461,28 @@ $1 \\\\
 \end{aligned}
 endsnippet
 
+snippet eqt "equation" wAm
+\begin{equation}
+$1 \\\\
+\end{equation}
+endsnippet
+
+snippet split "split" wAm
+\begin{split}
+$1 \\\\
+\end{split}
+endsnippet
+
 # == Auto Adaptive Close ==
 
 priority 100
 snippet lr "left( right)" Aim
 \left(${1} \right) $0
+endsnippet
+
+priority 100
+snippet LR "left[ right]" Aim
+\left[${1} \right] $0
 endsnippet
 
 priority 100
@@ -441,13 +495,7 @@ snippet @{} "left\{ right\}" Aim
 \left\\{${1} \right\\} $0
 endsnippet
 
-priority 100
-snippet LR "left[ right]" Aim
-\left[${1} \right] $0
-endsnippet
-
-priority 100
-snippet @< "leftangle rightangle" iAm
+snippet <> "inner product" iAm
 \left<${1} \right>$0
 endsnippet
 
@@ -474,8 +522,29 @@ endsnippet
 
 # ====== Lite Snippet ======
 
+snippet Var "Variance" iAm
+\Var
+endsnippet
+
+snippet Cov "Covariance" iAm
+\Cov
+endsnippet
+
+snippet label "label" iAm
+\label{$1}
+endsnippet
+
 snippet tag "tag" iAm
 \tag{$1}
+endsnippet
+
+priority 100
+snippet notag "notag" iAm
+\notag
+endsnippet
+
+snippet ref "eqref" iAm
+\eqref{$1}
 endsnippet
 
 snippet xyb "Auto (x, y)" iAm
@@ -513,11 +582,6 @@ snippet comma "comma" iAm
 ${1:x}_1,\ ${1:x}_2,\ \\cdots,\ ${1:x}_${2:n}
 endsnippet
 
-priority 100
-snippet plus "plus" iAm
-${1:k}_1${2:\\alpha}_1+${1:k}_2${2:\\alpha}_2+\\cdots+${1:k}_${3:n}${2:\\alpha}_${3:n}
-endsnippet
-
 snippet `\b([a-z])=n` "i=1,2,\cdots,n" wAm
 ``rv = m[1]``=1,\ 2,\ \cdots,\ n
 endsnippet
@@ -549,12 +613,28 @@ snippet `(?<!\\)diff` "d/dx" wAm
 \frac{\mathrm{d}${1:y}}{\mathrm{d}${2:x}}$0
 endsnippet
 
-snippet buu "bigcup" wAm
-\bigcup_{${1:i \in ${2: I}}} $0
+snippet uu "union" wAm
+\cup $0
 endsnippet
 
-snippet bnn "bigcap" wAm
-\bigcap_{${1:i \in ${2: I}}} $0
+snippet funion "finite union" wAm
+\bigcup_{${1:i = 1}}^{${2:n}} $0
+endsnippet
+
+snippet cunion "countable union" wAm
+\bigcup_{${1:i = 1}}^{${2:\infty}} $0
+endsnippet
+
+snippet nn "intersection" wAm
+\cap $0
+endsnippet
+
+snippet fitsct "finite intersection" wAm
+\bigcap_{${1:i = 1}}^{${2:n}} $0
+endsnippet
+
+snippet citsct "countable intersection" wAm
+\bigcap_{${1:i = 1}}^{${2:\infty}} $0
 endsnippet
 
 priority 100
@@ -582,6 +662,10 @@ let x = (b == 2) ? "A" : (b == 3) ? "V" : (b == 1 && isL) ? "s" : "x";
 final += " ${3} ~\\mathrm{d}${4:" + x + "} $0";
 rv = final;
 ``
+endsnippet
+
+snippet opn "operator name" iAm
+\\operatorname{$1}
 endsnippet
 
 # Custom: Can add more defined operator
