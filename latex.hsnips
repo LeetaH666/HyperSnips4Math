@@ -80,7 +80,6 @@ endsnippet
 snippet :: "colon" iA
 \colon
 endsnippet
-
 # == Fraction Match ==
 
 snippet // "Fraction" iAm
@@ -336,12 +335,24 @@ snippet xx "cross" iAm
 \times 
 endsnippet
 
+snippet ox "otimes" iAm
+\otimes 
+endsnippet
+
 snippet o+ "oplus" iAm
 \oplus
 endsnippet
 
 snippet oc "propotional to" iAm
 \propto
+endsnippet
+
+snippet vv "vee" wAm
+\vee $0
+endsnippet
+
+snippet ^^ "wedge" wAm
+\wedge $0
 endsnippet
 
 snippet eps "epsilon" wAm
@@ -382,6 +393,18 @@ endsnippet
 
 snippet !> "mapsto" iAm
 \mapsto 
+endsnippet
+
+snippet -p> "converge in probability" iAm
+\xrightarrow{p}
+endsnippet
+
+snippet -as> "converge almost surely" iAm
+\xrightarrow{\text{a.s.}}
+endsnippet
+
+snippet -d> "converge in distribution" iAm
+\xrightarrow{d}
 endsnippet
 
 snippet vdash "vdash" iAm
@@ -454,6 +477,10 @@ snippet >~ "succeeds or similar to" iAm
 \succsim
 endsnippet
 
+snippet <~ "precedes or similar to" iAm
+\precsim
+endsnippet
+
 # == Auto Environment ==
 
 # ==== Auto Math Mode ====
@@ -465,7 +492,7 @@ endsnippet
 snippet dm "display Math" wA
 $$
 ${1}
-$$$0
+$$
 endsnippet
 
 # ==== Common Environment ====
@@ -478,19 +505,19 @@ endsnippet
 
 snippet ali "aligned" wAm
 \begin{aligned}
-$1 \\\\
+	$1 \\\\
 \end{aligned}
 endsnippet
 
 snippet eqt "equation" wAm
 \begin{equation}
-$1 \\\\
+	$1 \\\\
 \end{equation}
 endsnippet
 
 snippet split "split" wAm
 \begin{split}
-$1 \\\\
+	$1 \\\\
 \end{split}
 endsnippet
 
@@ -610,19 +637,19 @@ endsnippet
 # ======== Common Operator Snippet ========
 
 snippet `(?<!\\)sum` "sum" wAm
-\sum\limits_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
-endsnippet
-
-snippet taylor "taylor" wAm
-\sum\limits_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
-endsnippet
-
-snippet `(?<!\\)lim` "limit" wAm
-\lim\limits_{${1:n} \to ${2:\infty}} 
+\sum_{${1:n}=${2:1}}^{${3:\infty}} ${4:a_n z^n}
 endsnippet
 
 snippet `(?<!\\)prod` "product" wAm
-\prod_{${1:n=${2:1}}}^{${3:\infty}} ${4:${VISUAL}} $0
+\prod_{${1:n}=${2:1}}^{${3:\infty}} ${4:a_n z^n}
+endsnippet
+
+snippet taylor "taylor" wAm
+\sum_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
+endsnippet
+
+snippet `(?<!\\)lim` "limit" wAm
+\lim_{${1:n} \to ${2:\infty}} 
 endsnippet
 
 snippet `(?<!\\)part` "d/dx" wAm
@@ -738,19 +765,19 @@ snippet defe "define equal" wAm
 endsnippet
 
 snippet min "minimize" wAm
-\underset{$0}{\min} ~ $1
+\min_{$1} $0
 endsnippet
 
 snippet max "maximize" wAm
-\underset{$1}{\max} ~ $0
+\max_{$1} $0
 endsnippet
 
 snippet sup "supremum" wAm
-\underset{$1}{\sup} ~ $0
+\sup_{$1} $0
 endsnippet
 
 snippet inf "infimum" wAm
-\underset{$1}{\inf} ~ $0
+\inf_{$1} $0
 endsnippet
 
 # == Matrix ==
@@ -802,8 +829,12 @@ snippet subplusmat "omission" iAm
 \\end{pmatrix}
 endsnippet
 
+# snippet jacobi "jacobi" iAm
+# \\begin{pmatrix}\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_${3:n}}\\\\\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_${3:n}}\\\\\\vdots&\\vdots&\\ddots&\\vdots\\\\\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_${3:n}}\\end{pmatrix}
+# endsnippet
+
 snippet jacobi "jacobi" iAm
-\\begin{pmatrix}\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_1}{\\partial ${2:x}_${3:n}}\\\\\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_2}{\\partial ${2:x}_${3:n}}\\\\\\vdots&\\vdots&\\ddots&\\vdots\\\\\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_1}&\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_2}&\\cdots&\\frac{\\partial ${1:f}_${3:m}}{\\partial ${2:x}_${3:n}}\\end{pmatrix}
+\left\vert \\begin{matrix} \\frac{\\partial ${1:x}}{\\partial ${3:u}} & \\frac{\\partial ${1:x}}{\\partial ${4:v}} \\\\ \\frac{\\partial ${2:y}}{\\partial ${3:u}} & \\frac{\\partial ${2:y}}{\\partial ${4:v}} \\end{matrix} \right\vert
 endsnippet
 
 # ==== Dynamic Matrix ====
@@ -843,6 +874,10 @@ endsnippet
 
 
 # == General ==
+
+snippet iid. "independent and identical distribution" wA
+i.i.d.
+endsnippet
 
 snippet box "Box" wA
 ``rv = '┌' + '─'.repeat(t[0].length + 2) + '┐'``
